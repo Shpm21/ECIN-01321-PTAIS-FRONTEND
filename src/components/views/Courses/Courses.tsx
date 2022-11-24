@@ -21,7 +21,7 @@ const Courses: React.FC = () => {
   const rutStudent = useParams<{ rutStudent: string }>()
   const [name, setName] = useState('')
   const [averageApproval, setAverageApproval] = useState(0)
-  const [isAverageApprobal, setIsAverageApprobal] = useState(false)
+  const [isAverageApproval, setIsAverageApproval] = useState(false)
   const [semesters, setSemesters] = useState<SemestersProps>()
   const [dispersion, setDispersion] = useState(1)
   const [semestersDB, setSemestersDB] = useState<SemestersProps>()
@@ -53,7 +53,7 @@ const Courses: React.FC = () => {
     try {
       const studyPlain = await getStudyPlain(
         rutStudent.rutStudent!,
-        isAverageApprobal,
+        isAverageApproval,
         dispersion
       )
       setSemesters(studyPlain)
@@ -82,7 +82,7 @@ const Courses: React.FC = () => {
               <div className="information-container-item">
                 <InputCredit
                   handleIsAverageApproval={({ target }) => {
-                    setAverageApproval(target.checked)
+                    setIsAverageApproval(target.checked)
                   }}
                 />
               </div>
@@ -121,7 +121,7 @@ const Courses: React.FC = () => {
               <p>Promedio de créditos aprobados: {averageApproval}</p>
               <InputCredit
                 handleIsAverageApproval={({ target }) => {
-                  setAverageApproval(target.checked)
+                  setIsAverageApproval(target.checked)
                 }}
               />
               <InputDispersion
