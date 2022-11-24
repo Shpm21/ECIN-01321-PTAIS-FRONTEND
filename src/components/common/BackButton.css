@@ -1,0 +1,41 @@
+.button-container {
+  /* position: absolute; */
+  top: 0;
+  right: 0;
+  margin: 10px;
+}
+
+.button-back {
+  background-color: #f44336;
+  border: none;
+  color: #f5f5f5;
+  padding: 0.5rem 1rem;
+  margin: 0.5rem;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.button-back:hover {
+  background-color: #c40d00;
+  color: #f5f5f5;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .button-back {
+    font-size: 1rem;
+  }
+
+  .button-container {
+    margin: 5px;
+  }
+
+  .button-container button {
+    font-size: 1rem;
+  }
+}

@@ -1,0 +1,50 @@
+.box-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #000;
+  border-radius: 5px;
+  background-color: #fff;
+  /* box-shadow: 0 0 5px 0 #000; */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 10px;
+}
+.box-container:hover {
+  box-shadow: 0 0 5px 0 #000;
+}
+.box-semester {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #000;
+  margin: 0;
+  padding: 0;
+  text-align: right;
+}
+
+.box-name {
+  font-size: 1rem;
+  font-weight: 300;
+  color: #000;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.box-credits { 
+  font-size: 1rem;
+  font-weight: 600;
+  color: #000;
+  margin: 0;
+  padding: 0;
+}
+
+@media (max-width: 768px) {
+  .box-name {
+    font-size: 0.8rem;
+  }
+  .box-credits {
+    font-size: 0.8rem;
+  }
+}

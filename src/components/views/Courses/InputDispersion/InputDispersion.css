@@ -1,0 +1,68 @@
+.input-dispersion-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 0 20px;
+}
+
+.input-dispersion-container label {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.input-dispersion-container select {
+  width: 60px;
+  height: 24px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 0 10px;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.input-dispersion-container select option {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .input-dispersion-container {
+    width: 50%;
+  }
+
+  .input-dispersion-container select {
+    height: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 0 10px;
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+
+  .input-dispersion-container label {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .input-dispersion-container button {
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    background-color: #000;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-top: 10px;
+  }
+  
+  .input-dispersion-container select option {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+}
