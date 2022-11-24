@@ -12,6 +12,7 @@
   font-size: 1.2rem;
   font-weight: 600;
   color: #000;
+  
 }
 
 .information-container {
@@ -23,26 +24,20 @@
   width: 50%;
   height: 100%;
   padding: 0 20px;
+
 }
 
-/* .information-container-item {
+.information-container-item {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
   height: 100%;
-  padding: 0 20px;
-  background-color: blue;
-} */
+}
 
 .scroll-container {
-
-  /* width: 100%;
-  height: 100%; */
-  /* width: 100rem; */
   height:50rem;
-  /* overflow: auto; */
   overflow-y:scroll;
   overflow-x:hidden;
 }
@@ -62,6 +57,7 @@
     font-size: 1rem;
     font-weight: 600;
     color: #000;
+    
   }
 
   .information-container {
@@ -78,5 +74,14 @@
     width: 100%;
     height: 100%;
     overflow: auto;
+  }
+
+  .information-container-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
   }
 }
