@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Navigate, useParams } from 'react-router-dom'
 import {
   getAverageApproval,
   getPersonsByRut,
@@ -25,7 +25,7 @@ const Courses: React.FC = () => {
   const [semesters, setSemesters] = useState<SemestersProps>()
   const [dispersion, setDispersion] = useState(1)
   const [semestersDB, setSemestersDB] = useState<SemestersProps>()
-
+  const [isBackToHome, setIsBackToHome] = useState(false)
   useEffect(() => {
     const s = semestersDb
     setSemestersDB(s)
@@ -63,11 +63,13 @@ const Courses: React.FC = () => {
   }
 
   const handleButtonStatus = () => {
-    // setStudent({} as Student)
     setToken('')
+    setIsBackToHome(true)
   }
+
   return (
     <>
+      {isBackToHome ? <Navigate to={'/home'} /> : null}
       {rutStudent.rutStudent === 'ADMIN' ? (
         <>
           <div className="list-container">
