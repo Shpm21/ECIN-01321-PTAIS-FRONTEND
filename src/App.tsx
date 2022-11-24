@@ -8,6 +8,7 @@ import {
 } from 'react-router-dom'
 import Home from './components/views/Home/Home'
 import Courses from './components/views/Courses/Courses'
+import NotFound from './components/views/NotFound/NotFound'
 
 function App() {
   return (
@@ -17,6 +18,8 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/" element={<Navigate replace to={'/home'} />} />
         <Route path="/courses/:rutStudent" element={<Courses />} />
+        <Route path="/404" element={<NotFound />} />
+        <Route path="*" element={<Navigate replace to={'/404'} />} />
       </Routes>
     </Router>
   )
@@ -25,9 +28,4 @@ function App() {
 const About: React.FC = () => {
   return <p>About</p>
 }
-
-const Login: React.FC = () => {
-  return <p>Login</p>
-}
-
 export default App
