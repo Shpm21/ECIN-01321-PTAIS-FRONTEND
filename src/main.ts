@@ -11,7 +11,7 @@ const createWindow = () => {
             nodeIntegration: false,
         }
     })
-    mainWindow.loadFile("public/index.html")
+    mainWindow.loadFile("../public/index.html")
 }
 
 app.whenReady().then(() => {
