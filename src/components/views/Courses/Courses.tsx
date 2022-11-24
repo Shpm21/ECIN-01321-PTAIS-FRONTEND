@@ -26,6 +26,8 @@ const Courses: React.FC = () => {
   const [dispersion, setDispersion] = useState(1)
   const [semestersDB, setSemestersDB] = useState<SemestersProps>()
   const [isBackToHome, setIsBackToHome] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
+
   useEffect(() => {
     const s = semestersDb
     setSemestersDB(s)
@@ -33,13 +35,21 @@ const Courses: React.FC = () => {
 
   useEffect(() => {
     const fetName = async () => {
-      const { name } = await getPersonsByRut(rutStudent.rutStudent!)
-      setName(name)
+      try {
+        const { name } = await getPersonsByRut(rutStudent.rutStudent!)
+        setName(name)
+      } catch (error) {
+        setErrorMessage('Página no encontrada')
+      }
     }
 
     const fetchAverageApproval = async () => {
-      const averageApproval = await getAverageApproval(rutStudent.rutStudent!)
-      setAverageApproval(averageApproval)
+      try {
+        const averageApproval = await getAverageApproval(rutStudent.rutStudent!)
+        setAverageApproval(averageApproval)
+      } catch (error) {
+        setErrorMessage('Página no encontrada')
+      }
     }
 
     fetName()
@@ -58,7 +68,7 @@ const Courses: React.FC = () => {
       )
       setSemesters(studyPlain)
     } catch (error) {
-      console.log(error)
+      setErrorMessage('Página no encontrada')
     }
   }
 
@@ -69,6 +79,7 @@ const Courses: React.FC = () => {
 
   return (
     <>
+      {errorMessage ? <Navigate to="/404" /> : <></>}
       {isBackToHome ? <Navigate to={'/home'} /> : null}
       {rutStudent.rutStudent === 'ADMIN' ? (
         <>
