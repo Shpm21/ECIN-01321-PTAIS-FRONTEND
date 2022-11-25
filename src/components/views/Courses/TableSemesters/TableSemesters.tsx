@@ -14,10 +14,6 @@ const TableSemesters: React.FC<Props> = (Props) => {
   return (
     <>
       <div>
-        <p>
-          Con base en tu rendimiento académico y a tus elecciones anteriores, te
-          recomiendo llevar este orden de asignaturas
-        </p>
         <table className="table-of-semesters">
           {semesters.map((sem: SemesterProps) => {
             return <Semester semester={sem} />
