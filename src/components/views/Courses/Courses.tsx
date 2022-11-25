@@ -1,3 +1,4 @@
+import { isVisible } from '@testing-library/user-event/dist/utils'
 import { useEffect, useState } from 'react'
 import { Navigate, useParams } from 'react-router-dom'
 import {
@@ -27,6 +28,7 @@ const Courses: React.FC = () => {
   const [semestersDB, setSemestersDB] = useState<SemestersProps>()
   const [isBackToHome, setIsBackToHome] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
+  const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
     const s = semestersDb
@@ -67,6 +69,7 @@ const Courses: React.FC = () => {
         dispersion
       )
       setSemesters(studyPlain)
+      setIsVisible(!isVisible)
     } catch (error) {
       setErrorMessage('Página no encontrada')
     }
@@ -107,8 +110,11 @@ const Courses: React.FC = () => {
                 />
               </div>
             </div>
-            <ButtonShow handleButtonAsignatures={handleButtonAsignatures} />
-            {semestersDB ? (
+            <ButtonShow
+              handleButtonAsignatures={handleButtonAsignatures}
+              isVisible={isVisible}
+            />
+            {semestersDB && isVisible ? (
               <>
                 <div className="scroll-container">
                   <TableSemesters semesters={semestersDB!} />
@@ -143,8 +149,11 @@ const Courses: React.FC = () => {
                 }}
               />
             </div>
-            <ButtonShow handleButtonAsignatures={handleButtonAsignatures} />
-            {semesters ? (
+            <ButtonShow
+              handleButtonAsignatures={handleButtonAsignatures}
+              isVisible={isVisible}
+            />
+            {semesters && isVisible ? (
               <>
                 <div className="scroll-container">
                   <TableSemesters semesters={semesters} />
