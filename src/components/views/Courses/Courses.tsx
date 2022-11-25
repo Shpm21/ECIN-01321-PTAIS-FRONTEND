@@ -57,6 +57,22 @@ const Courses: React.FC = () => {
     fetchAverageApproval()
   }, [])
 
+  useEffect(() => {
+    try {
+      const gStudyPlain = async () => {
+        const studyPlain = await getStudyPlain(
+          rutStudent.rutStudent!,
+          isAverageApproval,
+          dispersion
+        )
+        setSemesters(studyPlain)
+      }
+      gStudyPlain()
+    } catch (error) {
+      setErrorMessage('Página no encontrada')
+    }
+  }, [isAverageApproval, dispersion])
+
   const handleButtonAsignatures = async (
     event: React.FormEvent<HTMLFormElement>
   ) => {
