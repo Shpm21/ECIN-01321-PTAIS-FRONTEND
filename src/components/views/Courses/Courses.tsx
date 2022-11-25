@@ -165,6 +165,10 @@ const Courses: React.FC = () => {
             />
             {semesters && isVisible ? (
               <>
+                <p>
+                  Con base en tu rendimiento académico y a tus elecciones
+                  anteriores, te recomiendo llevar este orden de asignaturas
+                </p>
                 <div className="scroll-container">
                   <TableSemesters semesters={semesters} />
                   <TableSemesters semesters={semesters} />
