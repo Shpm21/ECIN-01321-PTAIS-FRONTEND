@@ -19,7 +19,7 @@ function App() {
         <Route path="/" element={<Navigate replace to={'/home'} />} />
         <Route path="/courses/:rutStudent" element={<Courses />} />
         <Route path="/404" element={<NotFound />} />
-        <Route path="*" element={<Navigate replace to={'/404'} />} />
+        {/* <Route path="*" element={<Navigate replace to={'/404'} />} /> */}
       </Routes>
     </Router>
   )
