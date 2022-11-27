@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import {
-  getPrerequisites,
-  getPrerequisitesByCodCourse
-} from '../../../../api/request'
+import { getPostRequisitesByCodCourse } from '../../../../api/request'
 import {
   CourseProps,
   SemesterProps,
-  Prerequisite
+  PostRequisite
 } from '../../../../config/interfaces-templates'
 import ViewCourse from '../ViewCourse/ViewCourse'
 import './Semester.css'
@@ -22,7 +19,7 @@ const Semester: React.FC<Props> = (Props) => {
   const { semester, courses } = Props.semester
   const { nextAsignatures } = Props
 
-  const [prerequisites, setPrerequisites] = useState<Prerequisite[]>([])
+  const [postRequisites, setPostRequisites] = useState<string[]>([])
 
   const getCantTotalCredit = () => {
     let cantTotalCredit = 0
@@ -34,19 +31,23 @@ const Semester: React.FC<Props> = (Props) => {
 
   useEffect(() => {
     if (Props.selectCourse) {
-      const getAllPrerequisites = async () => {
-        const p = await getPrerequisitesByCodCourse(Props.selectCourse.cod)
-        setPrerequisites(p)
+      const getAllPostRequisites = async () => {
+        const p = await getPostRequisitesByCodCourse(Props.selectCourse.cod)
+        setPostRequisites(p)
+        console.log(postRequisites)
       }
-
-      getAllPrerequisites()
+      getAllPostRequisites()
+      console.log(postRequisites)
+    } else {
+      setPostRequisites([])
     }
   }, [nextAsignatures])
 
   const comparecodCourseWithPrerequisites = (codCourse: string) => {
     let result = false
-    prerequisites.map((p) => {
-      if (p.cod_course === codCourse) {
+    postRequisites.map((pr: string) => {
+      console.log(pr + ' ' + codCourse)
+      if (pr === codCourse) {
         result = true
       }
     })
