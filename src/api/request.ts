@@ -45,3 +45,25 @@ export const getAverageApproval = async (rutStudent: string) => {
     const response = await axios.get(`${API}/averageapproval/${rutStudent}`, config);
     return response.data;
 }
+
+
+export const getPrerequisites = async () => {
+    let config = {
+        headers: {
+            Authorization: token
+        }
+    }
+    const response = await axios.get(`${API}/prerequisites/`, config);
+
+    return response.data;
+}
+
+export const getPrerequisitesByCodCourse = async (codCourse: string) => {
+    let config = {
+        headers: {
+            Authorization: token
+        }
+    }
+    const response = await axios.get(`${API}/prerequisites/info/${codCourse}`, config);
+    return response.data;
+}

@@ -6,7 +6,10 @@ import {
   getStudyPlain,
   setToken
 } from '../../../api/request'
-import { SemestersProps } from '../../../config/interfaces-templates'
+import {
+  CourseProps,
+  SemestersProps
+} from '../../../config/interfaces-templates'
 import semestersDb from '../../../db/db'
 import BackButton from '../../common/BackButton'
 import Logo from '../../common/Logo'
@@ -29,11 +32,35 @@ const Courses: React.FC = () => {
   const [isBackToHome, setIsBackToHome] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
   const [isVisible, setIsVisible] = useState(false)
+  const [selectCourse, setSelectCourse] = useState<CourseProps>()
+  const [nextAsignatures, setNextAsignatures] = useState<CourseProps[]>([])
+
+  useEffect(() => {
+    if (selectCourse) {
+      const getNextAsignatures = (course: CourseProps) => {
+        const nextAsignatures = semesters?.semesters
+          .filter((s) => s.semester === course.semester + 1)
+          .map((s) => s.courses)
+          .flat()
+        setNextAsignatures(nextAsignatures!)
+      }
+      getNextAsignatures(selectCourse!)
+    }
+  }, [selectCourse])
 
   useEffect(() => {
     const s = semestersDb
     setSemestersDB(s)
   }, [])
+
+  const handleSelectCourse = (course: CourseProps) => {
+    if (selectCourse?.cod === course.cod) {
+      setSelectCourse(undefined)
+      setNextAsignatures([])
+    } else {
+      setSelectCourse(course)
+    }
+  }
 
   useEffect(() => {
     const fetName = async () => {
@@ -100,89 +127,50 @@ const Courses: React.FC = () => {
     <>
       {errorMessage ? <Navigate to="/404" /> : <></>}
       {isBackToHome ? <Navigate to={'/home'} /> : null}
-      {rutStudent.rutStudent === 'ADMIN' ? (
-        <>
-          <div className="list-container">
-            <div className="logo-container">
-              <Logo />
-            </div>
-            <ViewName name={'ADMIN'} />
-            <div className="information-container">
-              <ViewTotalCredits totalCredits={30} />
-              <InputCredit
-                handleIsAverageApproval={({ target }) => {
-                  setIsAverageApproval(target.checked)
-                }}
-              />
-              <InputDispersion
-                handleDispersion={({ target }) => {
-                  setDispersion(parseInt(target.value))
-                }}
-              />
-            </div>
-            <ButtonShow
-              handleButtonAsignatures={handleButtonAsignatures}
-              isVisible={isVisible}
-            />
-            {semestersDB && isVisible ? (
-              <>
-                <div className="scroll-container">
-                  <TableSemesters semesters={semestersDB!} />
-                  <TableSemesters semesters={semestersDB!} />
-                  <TableSemesters semesters={semestersDB!} />
-                  <TableSemesters semesters={semestersDB!} />
-                </div>
-              </>
-            ) : (
-              <></>
-            )}
+      <>
+        <div className="list-container">
+          <div className="logo-container">
+            <Logo />
           </div>
-          <BackButton handleButtonStatus={handleButtonStatus} />
-        </>
-      ) : (
-        <>
-          <div className="list-container">
-            <div className="logo-container">
-              <Logo />
-            </div>
-            <ViewName name={name} />
-            <div className="information-container">
-              <ViewTotalCredits totalCredits={averageApproval} />
-              <InputCredit
-                handleIsAverageApproval={({ target }) => {
-                  setIsAverageApproval(target.checked)
-                }}
-              />
-              <InputDispersion
-                handleDispersion={({ target }) => {
-                  setDispersion(parseInt(target.value))
-                }}
-              />
-            </div>
-            <ButtonShow
-              handleButtonAsignatures={handleButtonAsignatures}
-              isVisible={isVisible}
+          <ViewName name={name} />
+          <div className="information-container">
+            <ViewTotalCredits totalCredits={averageApproval} />
+            <InputCredit
+              handleIsAverageApproval={({ target }) => {
+                setIsAverageApproval(target.checked)
+              }}
             />
-            {semesters && isVisible ? (
-              <>
-                <p>
-                  Con base en tu rendimiento académico y a tus elecciones
-                  anteriores, te recomiendo llevar este orden de asignaturas
-                </p>
-                <div className="scroll-container">
-                  <TableSemesters semesters={semesters} />
-                  <TableSemesters semesters={semesters} />
-                  <TableSemesters semesters={semesters} />
-                  <TableSemesters semesters={semesters} />
-                </div>
-              </>
-            ) : (
-              <></>
-            )}
+            <InputDispersion
+              handleDispersion={({ target }) => {
+                setDispersion(parseInt(target.value))
+              }}
+            />
           </div>
-          <BackButton handleButtonStatus={handleButtonStatus} />
-        </>
-      )}
+          <ButtonShow
+            handleButtonAsignatures={handleButtonAsignatures}
+            isVisible={isVisible}
+          />
+          {semesters && isVisible ? (
+            <>
+              <p>
+                Con base en tu rendimiento académico y a tus elecciones
+                anteriores, te recomiendo llevar este orden de asignaturas
+              </p>
+              <div className="scroll-container">
+                <TableSemesters
+                  semesters={semesters}
+                  nextAsignatures={nextAsignatures}
+                  handleSelectCourse={handleSelectCourse}
+                  selectCourse={selectCourse!}
+                />
+              </div>
+            </>
+          ) : (
+            <></>
+          )}
+        </div>
+        <BackButton handleButtonStatus={handleButtonStatus} />
+      </>
     </>
   )
 }
