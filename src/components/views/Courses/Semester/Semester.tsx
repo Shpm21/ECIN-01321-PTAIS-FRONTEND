@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { getPostRequisitesByCodCourse } from '../../../../api/request'
 import {
   CourseProps,
-  SemesterProps,
-  PostRequisite
+  SemesterProps
 } from '../../../../config/interfaces-templates'
 import ViewCourse from '../ViewCourse/ViewCourse'
 import './Semester.css'
