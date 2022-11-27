@@ -20,3 +20,9 @@ export interface Student {
   token: string
   refreshToken: string
 }
+
+export interface Prerequisite {
+  cod_plain: string
+  cod_course: string
+  cod_course_pre: string
+}
