@@ -58,12 +58,12 @@ export const getPrerequisites = async () => {
     return response.data;
 }
 
-export const getPrerequisitesByCodCourse = async (codCourse: string) => {
+export const getPostRequisitesByCodCourse = async (codCourse: string) => {
     let config = {
         headers: {
             Authorization: token
         }
     }
-    const response = await axios.get(`${API}/prerequisites/info/${codCourse}`, config);
+    const response = await axios.get(`${API}/postrequisites/${codCourse}`, config);
     return response.data;
 }
