@@ -11,6 +11,26 @@
   transition: all 0.3s ease;
   margin: 10px;
 }
+
+
+.box-container-selected {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #000;
+  border-radius: 5px;
+  background-color: #feb9b4;
+  /* box-shadow: 0 0 5px 0 #000; */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 10px;
+  transform: scale(1.1);
+}
+.box-container-selected:hover {
+  box-shadow: 0 0 5px 0 #000;
+}
+
 .box-container:hover {
   box-shadow: 0 0 5px 0 #000;
 }
