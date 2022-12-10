@@ -16,7 +16,7 @@ interface Props {
 
 const Semester: React.FC<Props> = (Props) => {
   const { semester, courses } = Props.semester
-  const { nextAsignatures } = Props
+  const { nextAsignatures, selectCourse, handleSelectCourse } = Props
 
   const [postRequisites, setPostRequisites] = useState<string[]>([])
 
@@ -29,14 +29,12 @@ const Semester: React.FC<Props> = (Props) => {
   }
 
   useEffect(() => {
-    if (Props.selectCourse) {
+    if (selectCourse) {
       const getAllPostRequisites = async () => {
-        const p = await getPostRequisitesByCodCourse(Props.selectCourse.cod)
+        const p = await getPostRequisitesByCodCourse(selectCourse.cod)
         setPostRequisites(p)
-        console.log(postRequisites)
       }
       getAllPostRequisites()
-      console.log(postRequisites)
     } else {
       setPostRequisites([])
     }
@@ -45,7 +43,6 @@ const Semester: React.FC<Props> = (Props) => {
   const comparecodCourseWithPrerequisites = (codCourse: string) => {
     let result = false
     postRequisites.map((pr: string) => {
-      console.log(pr + ' ' + codCourse)
       if (pr === codCourse) {
         result = true
       }
@@ -61,13 +58,13 @@ const Semester: React.FC<Props> = (Props) => {
           return comparecodCourseWithPrerequisites(c.cod) ? (
             <ViewCourse
               course={c}
-              handleSelectCourse={Props.handleSelectCourse}
+              handleSelectCourse={handleSelectCourse}
               keySelected={'ss'}
             />
           ) : (
             <ViewCourse
               course={c}
-              handleSelectCourse={Props.handleSelectCourse}
+              handleSelectCourse={handleSelectCourse}
               keySelected={'s'}
             />
           )

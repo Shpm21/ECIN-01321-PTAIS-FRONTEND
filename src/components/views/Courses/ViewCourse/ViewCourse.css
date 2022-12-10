@@ -12,7 +12,6 @@
   margin: 10px;
 }
 
-
 .box-container-selected {
   display: flex;
   flex-direction: column;
@@ -27,6 +26,7 @@
   margin: 10px;
   transform: scale(1.05);
 }
+
 .box-container-selected:hover {
   box-shadow: 0 0 5px 0 #000;
 }
@@ -34,6 +34,7 @@
 .box-container:hover {
   box-shadow: 0 0 5px 0 #000;
 }
+
 .box-semester {
   font-size: 1rem;
   font-weight: 600;
